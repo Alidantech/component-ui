@@ -1,5 +1,4 @@
 # Component Oriented Programming
-# Components
 
 This README provides information about several components for use in your application. Below, you'll find details on the Search, Timer, Audio Player, and Login components.
 
