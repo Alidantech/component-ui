@@ -114,4 +114,4 @@ This README provides information about several components for use in your applic
 
 ## License
 
-These components are available under the [IT License](LICENSE).
+These components are available under the [Mozilla Public License](LICENSE).

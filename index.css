@@ -1,0 +1,79 @@
+html, body {
+      /* background-color: rgb(39, 51, 61); */
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: rgb(3, 70, 31);
+      font-size: 0.9em;
+}
+
+a {
+      color: rgb(10, 45, 161);
+}
+
+
+/* contains the header and its element styles */
+header {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 10vh;
+      text-transform:capitalize;
+}
+
+@media screen and (max-width: 768px) {
+      header {
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            height: 10vh;
+      }
+}
+
+header nav {
+      height: 100%;
+      width: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+}
+
+/* contains the main page and its elements style */
+main {
+      height: 85vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
+#component-container {
+      box-shadow: rgba(0, 0, 0, 0.027) 1px 1px 6px 6px;
+      border-radius: 1%;
+      height: 90%;
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: box-shadow 1s ease-in-out;
+}
+
+#component-container:hover {
+      box-shadow: rgba(15, 97, 117, 0.144) 1px 1px 6px 6px;
+}
+
+@media screen and (max-width: 900px) {
+      #component-container {
+            box-shadow: rgba(0, 0, 0, 0.068) 1px 1px 6px 6px;
+            border-radius: 1%;
+            height: 80%;
+            width: 90%;
+      }
+}
+
+/* contains the footer and its elements style */
+footer {
+      color: gray;
+      text-align: center;
+}
