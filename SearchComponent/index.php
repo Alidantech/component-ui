@@ -1,19 +1,21 @@
-<?php
+<?php 
 require_once 'search.php';
 
-$response = array(); 
-$searchTerm = "john";
-echo  searchFunction();
+$seachComponent = new Search();
 
-function searchFunction() {
+$seachComponent->setDatabaseConfig('config/config.php');
+$response = $seachComponent->search("Mary");
 
-    $searchComponent = new Search();
-    $searchComponent->setDatabaseConfig('config/config.php');
-    echo  "The result is: ".$searchComponent->search();
+if ($response) {
+    // Fetch and format the results as JSON
+    $result = $response->fetchAll(PDO::FETCH_ASSOC);
+    $jsonResult = json_encode($result);
 
-    return $results;
+    // Send JSON data to the JavaScript file
+    header('Content-Type: application/json');
+    echo $jsonResult;
+} else {
+    // Handle the case where the query fails
+    die("PDO query failed: " . $this->connection->errorInfo());
 }
-
 ?>
-
-
