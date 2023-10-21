@@ -1,10 +1,19 @@
 <?php
-require_once 'SearchComponent.php';
+require_once 'search.php';
 
-$searchComponent = new SearchComponent();
+$response = array(); 
+$searchTerm = "john";
+echo  searchFunction();
 
-// Set the database configuration
-$searchComponent->setDatabaseConfig('config/db-config.php');
+function searchFunction() {
 
-// Use the search method
-$results = $searchComponent->search('search term');
+    $searchComponent = new Search();
+    $searchComponent->setDatabaseConfig('config/config.php');
+    echo  "The result is: ".$searchComponent->search();
+
+    return $results;
+}
+
+?>
+
+
