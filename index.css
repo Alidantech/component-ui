@@ -72,6 +72,29 @@ main {
       }
 }
 
+/* CSS for styling the table-like structure and hover effect */
+.result-table {
+      display: table;
+      border-collapse: collapse;
+      width: 100%;
+}
+
+.result-row {
+      display: table-row;
+}
+
+.result-cell {
+      display: table-cell;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      /* Optional border styling */
+}
+
+.result-cell:hover {
+      background-color: #f0f0f0;
+      /* Background color on hover */
+}
+
 /* contains the footer and its elements style */
 footer {
       color: gray;

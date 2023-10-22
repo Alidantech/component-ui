@@ -10,10 +10,8 @@ class Search {
     }
 
     public function search($queryKeyword) {
+        $result = [];
 
-        echo "searching for:".$queryKeyword;
-
-        $result = "No result";
         try {
             $sql = "SELECT * FROM students
                     WHERE first_name LIKE '%$queryKeyword%';
@@ -22,6 +20,7 @@ class Search {
         } catch (Exception $e) {
             return "Error: " . $e->getMessage();
         }
+
         return $result;
     }
 }
