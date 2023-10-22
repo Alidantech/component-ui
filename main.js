@@ -6,9 +6,12 @@
 import {SearchContent} from './componentUI/SearchUI/Search.js'
 
 let searchBtn = document.getElementById('search-btn');
+let keyword = document.getElementById('search-input').value;
 
 searchBtn.addEventListener('click', ()=>{
-
-      SearchContent();
-
+      if (!keyword) {
+            alert("please Enter a keyword")
+      }
+      
+      SearchContent(keyword);
 });
