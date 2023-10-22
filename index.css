@@ -9,6 +9,10 @@ a {
       color: rgb(10, 45, 161);
 }
 
+span {
+      color: #4285f4;
+      margin-right: 10px;
+}
 
 /* contains the header and its element styles */
 header {
@@ -108,6 +112,7 @@ footer {
       padding: 5px;
       width: 300px;
       max-width: 100%;
+      position: relative;
 }
 
 .search-box {
@@ -138,8 +143,40 @@ footer {
 }
 
 #search-view {
-      background-color: #cfcdbd;
-      min-height: 40vh;
-      width: 40%;
+      background-color: #a8ffe2;
       border-radius: 10px;
+}
+
+#search-suggestions {
+      position: absolute;
+      background-color: #e4e4e45e;
+      box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.137);
+      backdrop-filter: blur(20px);
+      border-radius: 10px;
+      padding: 3%;
+      width: 280px;
+      top: 105%;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 1;
+}
+
+#search-suggestions ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+}
+
+#search-suggestions li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+}
+
+#search-suggestions li:last-child {
+      border-bottom: none;
+}
+
+#search-suggestions li:hover {
+      background-color: #f0f0f0;
 }

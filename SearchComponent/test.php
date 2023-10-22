@@ -13,9 +13,11 @@ if ($mysqli->connect_error) {
 } else {
     echo "Connected successfully";
 
-    // Select all records from the "student" table
-    $query = "SELECT * FROM students";
-    $result = $mysqli->query($query);
+    $searchComponent = new Search();
+    $searchComponent->setDatabaseConfig('config/config.php');
+
+    // Assuming the search method in the Search class returns the mysqli result object
+    $result = $searchComponent->search("a");
 
     if ($result) {
         // Check if there are rows in the result set
@@ -24,8 +26,8 @@ if ($mysqli->connect_error) {
 
             // Loop through the result set and fetch data
             while ($row = $result->fetch_assoc()) {
-                echo "Student ID: " . $row['student_id'] . "";
-                echo " " . $row['first_name'] . " ".$row['last_name']." ".$row['birthdate'];
+                echo "Student ID: " . $row['StudentID'] . "";
+                echo " " . $row['FirstName'] . " ".$row['LastName']." ".$row['DateOfBirth'];
                 // Add more fields as needed
                 echo "\n";
             }

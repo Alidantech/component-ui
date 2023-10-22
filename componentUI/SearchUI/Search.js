@@ -33,19 +33,33 @@ function displaySearchResults(data) {
     const tableDiv = document.createElement('div');
     tableDiv.className = 'result-table'; // Add a class for styling
 
+    // Create the header row based on the keys of the first object in the data
+    const headerRow = document.createElement('div');
+    headerRow.className = 'result-row header-row';
+
+    for (const key in data[0]) {
+      if (data[0].hasOwnProperty(key)) {
+        const headerCell = document.createElement('div');
+        headerCell.className = 'result-cell header-cell'; // Add a class for styling
+        headerCell.textContent = key;
+        headerRow.appendChild(headerCell);
+      }
+    }
+
+    tableDiv.appendChild(headerRow);
+
     data.forEach((result, index) => {
       const rowDiv = document.createElement('div');
       rowDiv.className = 'result-row'; // Add a class for styling
 
-      const resultDiv = document.createElement('div');
-      resultDiv.className = 'result-cell'; // Add a class for styling
-      resultDiv.textContent = `${result.first_name} ${result.last_name}`;
-      rowDiv.appendChild(resultDiv);
-
-      const birthdateDiv = document.createElement('div');
-      birthdateDiv.className = 'result-cell'; // Add a class for styling
-      birthdateDiv.textContent = `Birthdate: ${result.birthdate}`;
-      rowDiv.appendChild(birthdateDiv);
+      for (const key in result) {
+        if (result.hasOwnProperty(key)) {
+          const cellDiv = document.createElement('div');
+          cellDiv.className = 'result-cell'; // Add a class for styling
+          cellDiv.textContent = result[key];
+          rowDiv.appendChild(cellDiv);
+        }
+      }
 
       tableDiv.appendChild(rowDiv);
     });
@@ -57,5 +71,6 @@ function displaySearchResults(data) {
     searchViewDiv.appendChild(noResultDiv);
   }
 }
+
 
 export { SearchContent };

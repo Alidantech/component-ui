@@ -4,30 +4,25 @@ class Database {
     private $connection;
 
     public function __construct($host, $user, $password, $database) {
-       $this->tryPDOConnection($host, $user, $password, $database);
+        $this->tryMysqliConnection($host, $user, $password, $database);
     }
 
-    private function tryPDOConnection($host, $user, $password, $database) {
-        try {
-            $this->connection = new PDO("mysql:host=$host;dbname=$database", $user, $password);
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return true; # Successful PDO connection
-        } catch (PDOException $e) {
-            return false; # PDO connection failed
+    private function tryMysqliConnection($host, $user, $password, $database) {
+        $this->connection = new mysqli($host, $user, $password, $database);
+        if ($this->connection->connect_error) {
+            die("Mysqli connection failed: " . $this->connection->connect_error);
         }
     }
 
     public function query($sql) {
-        if ($this->connection instanceof PDO) {
-            // Use PDO for queries
-            try {
-                $statement = $this->connection->query($sql);
-                // Handle errors and return results
-                return $statement;
-            } catch (PDOException $e) {
-                die("PDO query failed: " . $e->getMessage());
+        if ($this->connection instanceof mysqli) {
+            // Use mysqli for queries
+            $result = $this->connection->query($sql);
+            if ($result === false) {
+                die("Mysqli query failed: " . $this->connection->error);
             }
-        }else {
+            return $result;
+        } else {
             die("No valid database connection available for query");
         }
     }

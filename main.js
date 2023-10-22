@@ -3,22 +3,45 @@
  * 
  */
 //Search component
-import {SearchContent} from './componentUI/SearchUI/Search.js';
+import { SearchContent } from './componentUI/SearchUI/Search.js';
+import { SuggestContent } from './componentUI/SearchUI/Suggest.js';
 
-let searchBtn = document.getElementById('search-btn');
 
+const searchBtn = document.getElementById('search-btn');
+const searchInput = document.getElementById('search-input');
+const searchSuggestions = document.getElementById('search-suggestions');
 
-searchBtn.addEventListener('click', ()=>{
+searchBtn.addEventListener('click', () => {
+  let keyword = searchInput.value;
 
-      let keyword = document.getElementById('search-input').value;
-      let data;
+  if (!keyword) {
+    alert("Please enter a keyword");
+  } else {
+    SearchContent(keyword);
+    searchSuggestions.innerHTML = '';
+  }
+});
 
-      if (!keyword) {
-            alert("please Enter a keyword")
-      }else {
+// Add an event listener for the Enter key press on the input field
+searchInput.addEventListener('keyup', (event) => {
+  if (event.key === "Enter") {
+    // Prevent the default form submission
+    event.preventDefault();
 
-            SearchContent(keyword);
-            
-      }
+    // Trigger the search when the Enter key is pressed
+    let keyword = searchInput.value;
+
+    if (!keyword) {
+      alert("Please enter a keyword");
+    } else {
+      SearchContent(keyword);
+      searchSuggestions.innerHTML = '';
+    }
+  }
+});
+
+searchInput.addEventListener('input', function() {
+    const keyword = this.value.trim();
+    SuggestContent(keyword);
 });
 

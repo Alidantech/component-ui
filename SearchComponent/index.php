@@ -21,23 +21,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 function SearchQuery($keyword) {
+    $searchComponent = new Search();
+    $searchComponent->setDatabaseConfig('config/config.php');
 
-    $seachComponent = new Search();
+    // Assuming the search method in the Search class returns the mysqli result object
+    $result = $searchComponent->search($keyword);
 
-    $seachComponent->setDatabaseConfig('config/config.php');
-        
-    $response = $seachComponent->search($keyword);
+    if ($result) {
+        $data = array(); // Initialize an array to store the data
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row; // Add each row to the array
+        }
 
-    if ($response) {
-        // Fetch and format the results as JSON
-        $result = $response->fetchAll(PDO::FETCH_ASSOC);
-        $jsonResult = json_encode($result);
+        // Convert the array to JSON
+        $jsonResult = json_encode($data);
 
         return $jsonResult;
-
     } else {
         // Handle the case where the query fails
-        die("PDO query failed: " . $this->connection->errorInfo());
+        die("Mysqli query failed: " . $searchComponent->getConnection()->error);
     }
 }
 
