@@ -13,8 +13,8 @@ class Search {
         $result = [];
 
         try {
-            $sql = "SELECT * FROM teachers
-                    WHERE FirstName LIKE '%$queryKeyword%';
+            $sql = "SELECT * FROM courses
+                    WHERE CourseName LIKE '%$queryKeyword%';
                     ";
             $result = $this->db->query($sql);
         } catch (Exception $e) {
