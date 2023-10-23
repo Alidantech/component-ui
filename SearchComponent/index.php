@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($request['keyword'])) {
 
         $keyword = $request['keyword'];
-
+        $tables = $request['tables'];
         // Send JSON data to the JavaScript file
         header('Content-Type: application/json');
-        echo SearchQuery($keyword);
+        echo SearchQuery($keyword, $tables);
         
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Keyword is missing']);
@@ -20,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
 
-function SearchQuery($keyword) {
+function SearchQuery($keyword, $tables) {
     $searchComponent = new Search();
     $searchComponent->setDatabaseConfig('config/config.php');
 
     // Assuming the search method in the Search class returns the mysqli result object
-    $result = $searchComponent->search($keyword);
+    $result = $searchComponent->search($keyword, $tables);
 
     if ($result) {
         $data = array(); // Initialize an array to store the data

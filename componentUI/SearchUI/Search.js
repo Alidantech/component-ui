@@ -2,12 +2,19 @@
 
 async function SearchContent(queryKeyword) {
   try {
+    // Load the table JSON from a file
+    const tableJSON = await fetch('componentUI/SearchUI/tables.json').then((response) => response.json());
+
+    const requestBody = {
+      keyword: queryKeyword,
+      tables: tableJSON
+    };
     const response = await fetch('SearchComponent/index.php', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ keyword: queryKeyword }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
@@ -16,12 +23,13 @@ async function SearchContent(queryKeyword) {
 
     const data = await response.json();
 
-    // return the JSON response from the serve
-    displaySearchResults(data)
+    // return the JSON response from the server
+    displaySearchResults(data);
   } catch (error) {
     console.error('Error:', error);
   }
 }
+
 
 function displaySearchResults(data) {
   const searchViewDiv = document.getElementById('search-view');

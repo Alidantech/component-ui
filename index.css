@@ -145,6 +145,10 @@ footer {
 #search-view {
       background-color: #a8ffe2;
       border-radius: 10px;
+      width: auto;
+      height: 60vh;
+      overflow-y: auto;
+
 }
 
 #search-suggestions {

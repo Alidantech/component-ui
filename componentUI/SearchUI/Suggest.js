@@ -2,12 +2,19 @@
 
 async function SuggestContent(queryKeyword) {
   try {
+    // Load the table JSON from a file
+    const tableJSON = await fetch('componentUI/SearchUI/tables.json').then((response) => response.json());
+
+    const requestBody = {
+      keyword: queryKeyword,
+      tables: tableJSON
+    };
     const response = await fetch('SearchComponent/index.php', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ keyword: queryKeyword }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {

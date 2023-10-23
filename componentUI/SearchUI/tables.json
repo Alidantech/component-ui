@@ -1,0 +1,4 @@
+{
+  "students": [ "FirstName", "LastName", "DateOfBirth", "Address", "Email", "Phone", "EnrollmentDate"],
+  "grades": ["FirstName", "LastName","Score","Grade"]
+}
