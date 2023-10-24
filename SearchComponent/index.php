@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 function SearchQuery($keyword, $tables) {
+
     $searchComponent = new Search();
     $searchComponent->setDatabaseConfig('config/config.php');
 
@@ -42,6 +43,5 @@ function SearchQuery($keyword, $tables) {
         die("Mysqli query failed: " . $searchComponent->getConnection()->error);
     }
 }
-
 
 ?>
