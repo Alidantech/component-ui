@@ -43,7 +43,8 @@ This README provides information about several components for use in your applic
 
 ### Requires Interface
 
-- No specific requirements.
+- Php server
+- Mysql Database
 
 ### Usage
 
