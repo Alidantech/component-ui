@@ -12,7 +12,7 @@ function createJoinQuery($jsonData, $keyword) {
 
         // Define join conditions, assuming a common column like "StudentID" exists in the tables
         if ($table !== "students") {
-            $joinConditions[] = "students.student_id = $table.student_id";
+            $joinConditions[] = "students.studentID = $table.studentID";
         }
     }
 
@@ -25,7 +25,7 @@ function createJoinQuery($jsonData, $keyword) {
     }
     
     // Add a WHERE clause to search for the keyword in FirstName or LastName
-    $joinQuery .= " WHERE students.first_name LIKE '%$keyword%' OR students.last_name LIKE '%$keyword%'";
+    $joinQuery .= " WHERE students.FirstName LIKE '%$keyword%' OR students.LastName LIKE '%$keyword%'";
 
     return $joinQuery;
 }

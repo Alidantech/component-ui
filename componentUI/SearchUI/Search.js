@@ -21,8 +21,9 @@ async function SearchContent(queryKeyword) {
       throw new Error('HTTP request failed');
     }
 
-    const data = await response.json();
-
+  
+    const data = await response.text();
+    console.log(data)
     // return the JSON response from the server
     displaySearchResults(data);
   } catch (error) {

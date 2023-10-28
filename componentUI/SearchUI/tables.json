@@ -1,4 +1,4 @@
 {
-  "students": [ "first_name"],
-  "grades": ["first_name", "last_name", "grade"]
+  "students": [ "FirstName"],
+  "grades": ["FirstName", "LasName", "grade"]
 }
