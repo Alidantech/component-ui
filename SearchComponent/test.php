@@ -4,24 +4,21 @@ $json_data = '
 {
   "tables": {
      
-     "students": ["StudentID", "FirstName", "LastName"],
-     "grades": ["StudentID", "grade", "score"]
+     "classes": ["ClassID", "ClassName", "CourseID", "TeacherID"],
+     "teachers": ["TeacherID", "FirstName", "LastName"]
   }
 }
 ';
 
 $keyword = "John";
 
-function createQueries($json_data, $keyword) {
+function createQuery($json_data, $keyword) {
     // Parse the JSON data into a PHP array
     $data = json_decode($json_data, true);
 
     if ($data === null) {
         return "Invalid JSON data";
     }
-
-    // Initialize an array to store the generated queries
-    $queries = [];
 
     // Determine the number of tables in the JSON data
     $numTables = count($data['tables']);
@@ -30,74 +27,69 @@ function createQueries($json_data, $keyword) {
         // If there are multiple tables, find common columns
         $commonColumns = findCommonColumns($data['tables']);
 
-        // Create a SELECT query that selects all columns from each table
-        $selectColumns = [];
-        foreach ($data['tables'] as $table => $tableColumns) {
-            foreach ($tableColumns as $column) {
-                $selectColumns[] = "$table.$column";
-            }
-        }
-
-        // Add common columns to the select columns array with table alias
-        foreach ($commonColumns as $column => $tables) {
-            foreach ($tables as $table) {
-                $selectColumns[] = "$table.$column";
-            }
-        }
+        // Initialize arrays to store unique columns and tables
+        $uniqueColumns = [];
+        $uniqueTables = [];
 
         // Build the JOIN query
-        $joinQuery = "SELECT " . implode(', ', $selectColumns) . " FROM " . implode(' JOIN ', array_keys($data['tables'])) . " WHERE ";
+        $selectColumns = [];
+
+        foreach ($data['tables'] as $table => $tableColumns) {
+            foreach ($tableColumns as $column) {
+                $uniqueColumnKey = "$table.$column";
+                if (!isset($uniqueColumns[$uniqueColumnKey])) {
+                    $selectColumns[] = $uniqueColumnKey;
+                    $uniqueColumns[$uniqueColumnKey] = true;
+                }
+            }
+            $uniqueTables[$table] = true;
+        }
+
+        $joinQuery = "SELECT " . implode(', ', $selectColumns) . " FROM " . implode(' JOIN ', array_keys($uniqueTables)) . " WHERE ";
         
         // Initialize an array to store conditions for each column
         $conditions = [];
 
-        // Add conditions for the join query
-        foreach (array_keys($data['tables']) as $table) {
-            $conditions[] = "$table.FirstName = '$keyword'";
+        // Add conditions for the join query using the LIKE operator
+        foreach ($uniqueTables as $table => $_) {
+            foreach ($data['tables'][$table] as $column) {
+                $conditions[] = "$table.$column LIKE '%$keyword%'";
+            }
         }
 
         $joinQuery .= implode(' OR ', $conditions);
 
-        // Store the join query in the $queries array
-        $queries[] = $joinQuery;
+        return $joinQuery;
     } elseif ($numTables === 1) {
         // If there is only one table, create a normal query
         $table = key($data['tables']);
         $columns = $data['tables'][$table];
 
-        $query = "SELECT " . implode(', ', $columns) . " FROM $table WHERE ";
-        
         // Initialize an array to store conditions for each column
         $conditions = [];
 
-        // Loop through columns and create a condition for each one
+        // Loop through columns and create a condition for each one using the LIKE operator
         foreach ($columns as $column) {
-            $conditions[] = "$column = '$keyword'";
+            $conditions[] = "$column LIKE '%$keyword%'";
         }
 
         // Combine conditions using "OR" to search for the keyword in any column
-        $query .= implode(' OR ', $conditions);
-        
-        // Store the query in the $queries array
-        $queries[] = $query;
+        $query = "SELECT " . implode(', ', $columns) . " FROM $table WHERE " . implode(' OR ', $conditions);
+
+        return $query;
     }
 
-    return $queries;
+    return "No tables found in JSON data"; // Handle the case when no tables are found
 }
 
+// Call the function and get the query as a string
+$query = createQuery($json_data, $keyword);
 
-
-
-// Call the function and get the queries
-$queries = createQueries($json_data, $keyword);
-
-if (is_array($queries)) {
-    // Display the generated queries
-    foreach ($queries as $query) {
-        echo "Query: $query\n";
-    }
+if (is_string($query)) {
+    // Display the generated query
+    echo "Query: $query\n";
 } else {
-    echo $queries;
+    echo $query;
 }
 
 function findCommonColumns($tables) {

@@ -1,0 +1,5 @@
+{
+  "tables": {
+     "classes": ["ClassID", "ClassName"]
+  }
+}

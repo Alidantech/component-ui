@@ -1,9 +1,9 @@
 // The search component client
 
-async function SuggestContent(queryKeyword) {
+async function SuggestContent(queryKeyword, jsonFilePath) {
   try {
     // Load the table JSON from a file
-    const tableJSON = await fetch('componentUI/SearchUI/tables.json').then((response) => response.json());
+    const tableJSON = await fetch(jsonFilePath).then((response) => response.json());
 
     const requestBody = {
       keyword: queryKeyword,

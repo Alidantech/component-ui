@@ -1,9 +1,9 @@
 // The search component client
 
-async function SearchContent(queryKeyword) {
+async function SearchContent(queryKeyword, jsonFilePath) {
   try {
     // Load the table JSON from a file
-    const tableJSON = await fetch('componentUI/SearchUI/tables.json').then((response) => response.json());
+    const tableJSON = await fetch(jsonFilePath).then((response) => response.json());
 
     const requestBody = {
       keyword: queryKeyword,
@@ -22,7 +22,7 @@ async function SearchContent(queryKeyword) {
     }
 
   
-    const data = await response.text();
+    const data = await response.json();
     console.log(data)
     // return the JSON response from the server
     displaySearchResults(data);

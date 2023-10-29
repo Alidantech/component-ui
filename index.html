@@ -3,23 +3,28 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Component</title>
+      <title>Search Component</title>
       <link rel="stylesheet" href="index.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+      <div id="loading-container">YES</div>
       <header>
-            <h1>component oriented programming</h1>
+            <h1>COP</h1>
+            <h2 id="search-title"></h2>
             <nav>
-                  <a id="" href="/">login</a>
-                  <a id="" href="/">search</a>
-                  <a id="timer-link" href="/">timer</a>
+                  <a id="search-grades" title="search grades" href="#">Grades</a>
+                  <a id="search-students" title="search students" href="#">Students</a>
+                  <a id="search-courses" title="search courses" href="#">Courses</a>
+                  <a id="search-teachers" title="search teachers" href="#">Teachers</a>
+                  <a id="search-classes" title="search classes" href="#">Classes</a>
             </nav>
       </header>
       <main>
             <section id="component-container">
                   <div class="search-container">
-                        <input id="search-input" type="text" class="search-box" placeholder="Search">
+                        <input id="search-input" type="text" class="search-box" placeholder="Search Students">
                         <button id="search-btn" class="fa fa-search search-icon"></button>
                         <div id="search-suggestions">
                               <h3>Suggestions</h3>

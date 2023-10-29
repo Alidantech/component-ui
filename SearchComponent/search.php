@@ -14,7 +14,7 @@ class Search {
         $result = [];
 
         try {
-            $sql = createJoinQuery($tables, $queryKeyword);
+            $sql = createQuery($tables, $queryKeyword);
             $result = $this->db->query($sql);
         } catch (Exception $e) {
             return "Error: " . $e->getMessage();

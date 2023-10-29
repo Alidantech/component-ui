@@ -1,0 +1,5 @@
+{
+  "tables": {
+     "teachers": ["TeacherID", "FirstName", "LastName", "Address", "Email", "Phone", "DateOfBirth"]
+  }
+}

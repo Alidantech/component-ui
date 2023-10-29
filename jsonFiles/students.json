@@ -1,0 +1,5 @@
+{
+  "tables": {
+     "students": ["StudentID", "FirstName", "LastName", "Address", "Email", "Phone", "DateOfBirth"]
+  }
+}
