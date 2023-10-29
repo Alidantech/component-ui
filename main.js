@@ -3,8 +3,8 @@
  * 
  */
 //Search component
-import { SearchContent } from './componentUI/SearchUI/Search.js';
-import { SuggestContent } from './componentUI/SearchUI/Suggest.js';
+import { SearchContent } from './SearchUI/Search.js';
+import { SuggestContent } from './SearchUI/Suggest.js';
 
 const searchBtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('search-input');
