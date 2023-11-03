@@ -1,5 +1,6 @@
 {
   "tables": {
-     "grades": ["StudentID", "Score", "Grade"]
+      "students": ["StudentID", "FirstName", "LastName"],
+      "grades": ["StudentID", "Score", "Grade"]
   }
 }

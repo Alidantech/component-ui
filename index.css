@@ -1,6 +1,23 @@
+button {
+      cursor: pointer;
+}
+
+/* Style the track of the scrollbar */
+::-webkit-scrollbar {
+      width: 4px;
+      /* Customize the scrollbar width for WebKit browsers */
+}
+
+/* Style the thumb of the scrollbar */
+::-webkit-scrollbar-thumb {
+      background: rgba(230, 230, 230, 0.801);
+      border-radius: 10px;
+}
+
 html, body {
       font-family: 'Poppins', sans-serif;
       font-size: 0.9em;
+      color: #3498db;
 }
 
 * {
@@ -11,6 +28,7 @@ html, body {
 
 a {
       color: rgb(10, 45, 161);
+      text-decoration: none;
 }
 
 span {
@@ -18,11 +36,12 @@ span {
       margin-right: 10px;
 }
 
+
 /* contains the header and its element styles */
 header {
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
       height: 10vh;
       text-transform:capitalize;
 }
@@ -55,10 +74,10 @@ main {
 
 #component-container {
       height: 85vh;
-      width: 90%;
+      width: 80%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content:flex-start;
       flex-direction: column;
       transition: box-shadow 1s ease-in-out;
 }
@@ -79,16 +98,28 @@ main {
       display: table;
       border-collapse: collapse;
       width: 100%;
+      position: relative;
 }
+
+
 
 .result-row {
       display: table-row;
+      background-color: #ffffff;
+}
+
+.header-row {
+      position: sticky;
+      backdrop-filter: blur(30px);
+      border-radius: 10px;
+      top: 0;
+      box-shadow: 1px 2px rgba(0, 0, 0, 0.041);
 }
 
 .result-cell {
       display: table-cell;
       padding: 5px 10px;
-      border: 1px solid #ccc;
+      /* border: 1px solid #ccc; */
       /* Optional border styling */
 }
 
@@ -101,11 +132,17 @@ main {
 footer {
       color: gray;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      height: 4vh;
 }
 
 .search-container {
       display: flex;
-      background-color: #f1f1f1;
+      background-color: #f1f1f167;
+      box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.13);
       border-radius: 25px;
       padding: 5px;
       width: 500px;
@@ -114,22 +151,32 @@ footer {
       margin: auto;
 }
 
+#filter-btn {
+      position: absolute;
+      top: 35%;
+      left: 10px;
+      height: 30%;
+      width: 35px;
+      border: none;
+      border-right: 2px solid rgb(192, 192, 192);
+      background-color: transparent;
+}
+
 .search-box {
       border: none;
-      padding: 10px;
+      padding: 15px 50px;
       width: 100%;
       border-radius: 25px 0 0 25px;
       outline: none;
 }
 
 .search-icon {
-      background-color: #4285f4;
-      color: white;
+      background-color: transparent;
       border-radius: 0 25px 25px 0;
       padding: 10px;
       cursor: pointer;
       border: none;
-      width: 20%;
+      width: 10%;
 }
 
 /* Styles for better mobile responsiveness */
@@ -145,7 +192,7 @@ footer {
 
 #search-view {
       width: 95%;
-      height: 90%;
+      max-height: 90%;
       box-sizing: border-box;
       overflow-y: auto;
 }
@@ -153,15 +200,15 @@ footer {
 #search-suggestions {
       position: absolute;
       background-color: #e4e4e45e;
-      box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.137);
+      /* box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.137); */
       backdrop-filter: blur(20px);
       border-radius: 10px;
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       flex-direction: column;
-      width: 480px;
-      top: 105%;
+      width: 99%;
+      top: 110%;
       max-height: 150px;
       overflow-y: auto;
       z-index: 1;
@@ -190,18 +237,19 @@ footer {
 }
 
 #loading-container {
-      background: radial-gradient(circle at center, rgba(175, 9, 9, 0.062), #00ff0010, rgba(0, 185, 241, 0.288));
+      background: radial-gradient(circle at center, rgba(175, 9, 9, 0.041), #00ff000c, rgba(0, 185, 241, 0.068));
       width: 100vw;
       height: 100vh;
       visibility: hidden;
-      position: absolute;
+      position: fixed;
       margin: 0;
       z-index: 100;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
       flex-direction: column;
-      backdrop-filter: blur(100px);
+      backdrop-filter: blur(30px);
+      transition: visibility 0.5s ease-in-out;
 }
 
 @keyframes animateLoading {
@@ -212,6 +260,7 @@ footer {
       to {
             visibility: hidden;
             color: rgb(0, 255, 0);
+            background-color: #cccccc23;
       }
 }
 
@@ -260,13 +309,52 @@ footer {
 
 #load-title {
       text-transform: capitalize;
-      /* Converts the text to start with capital letters */
-      font-size: 3em;
-      /* Adjust the font size to your preference */
-      /* Other CSS properties for further styling if needed */
 }
 
 iframe {
       border: none;
       background-color: transparent;
+}
+
+
+#search-filters {
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.233);
+      text-align: center;
+      right: 101%;
+      width: 50%;
+      height: 40vh;
+      z-index: 100;
+      opacity: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+}
+
+.show-filters {
+      opacity: 1 !important;
+}
+
+/* Style for individual filter divs */
+.filter {
+      background-color: #ffffff;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.178);
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+}
+
+.filter:hover {
+      background-color: #e0e0e0;
+}
+
+/* Style for checkboxes within the filters */
+.filter input[type="checkbox"] {
+      margin-right: 5px;
 }

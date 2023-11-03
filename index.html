@@ -9,17 +9,13 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-      <!-- <div id="loading-container">
-            
-      </div> -->
       <div id="loading-container" class="loading-container">
             <iframe src="https://lottie.host/?file=7e03b9f7-f84e-4f8e-899c-e8865079d148/bGlbxGwInU.json"></iframe>
-            <div class="spinner"></div>
             <h1 id="load-title"></h1>
+            <div class="spinner"></div>
       </div>
       <header>
-            <h1>COP</h1>
-            <h2 id="search-title"></h2>
+            <h2 id="search-title">Search Students</h2>
             <nav>
                   <a id="search-grades" title="search grades" href="#">Grades</a>
                   <a id="search-students" title="search students" href="#">Students</a>
@@ -31,12 +27,23 @@
       <main>
             <section id="component-container">
                   <div class="search-container">
-                        <input id="search-input" type="text" class="search-box" placeholder="Search Students">
+                        <button id="filter-btn">
+                              <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                    viewBox="0 0 576 512"><path
+                                          d="M151.6 469.6C145.5 476.2 137 480 128 480s-17.5-3.8-23.6-10.4l-88-96c-11.9-13-11.1-33.3 2-45.2s33.3-11.1 45.2 2L96 365.7V64c0-17.7 14.3-32 32-32s32 14.3 32 32V365.7l32.4-35.4c11.9-13 32.2-13.9 45.2-2s13.9 32.2 2 45.2l-88 96zM320 480c-17.7 0-32-14.3-32-32s14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H320zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H320zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H320zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H320z" />
+                              </svg>
+                        </button>
+                        <input id="search-input" type="text" class="search-box" placeholder="Search Students" autocomplete="off">
                         <button id="search-btn" class="fa fa-search search-icon"></button>
                         <div id="search-suggestions">
                         </div>
+                        <div id="search-filters">
+                        </div>
                   </div>
                   <div id="search-view">
+                        <div id="loading-container">
+                              <div class="spinner"></div>
+                        </div>
                   </div>
             </section>
       </main>

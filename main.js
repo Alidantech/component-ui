@@ -52,7 +52,7 @@ const searchCourses = document.getElementById('search-courses');
 const searchTeachers = document.getElementById('search-teachers');
 const searchClasses = document.getElementById('search-classes');
 const searchTitle = document.getElementById('search-title');
-// var Load = document.getElementById('loading-container');
+const searcView = document.getElementById('search-view');
 var LoadTitle = document.getElementById('load-title');
 const Load = document.getElementById('loading-container');
 
@@ -65,6 +65,14 @@ function showLoadingSpinner(title, jsonPath) {
     Load.classList.remove('showLoad');
   }, 2000);
   tablesJsonPath = jsonPath;
+  searcView.innerHTML = '';
+  const keyword = searchInput.value.trim();
+  if(keyword){
+      SuggestContent(keyword, tablesJsonPath);
+  }else {
+    searchSuggestions.innerHTML = '';
+  }
+  CreateFilters();
 }
 
 
@@ -100,3 +108,63 @@ searchClasses.addEventListener('click', function(event) {
   showLoadingSpinner(this.title, jsonPath);
 });
 
+
+
+// Add search filters:
+
+const filterButton = document.getElementById('filter-btn');
+const searchFilters = document.getElementById('search-filters');
+
+// Handle focus events to show the "search-filters" div
+filterButton.addEventListener('click', function() {
+    searchFilters.classList.toggle('show-filters');
+});
+
+// Handle blur events to hide the "search-filters" div
+searchFilters.addEventListener(!'focus', function() {
+    searchFilters.classList.remove('show-filters');
+    console.log("Ignored filters")
+});
+
+document.addEventListener('DOMContentLoaded', CreateFilters());
+
+function CreateFilters() {
+    fetch(tablesJsonPath)
+        .then(response => response.json())
+        .then(data => {
+            const tables = data.tables;
+            const allColumns = Object.keys(tables).reduce((columns, table) => {
+                return columns.concat(tables[table]);
+            }, []);
+
+            searchFilters.innerHTML = '';
+
+            // Create filters inside div elements
+            allColumns.forEach(column => {
+                // Create a div for each filter
+                const filterDiv = document.createElement('div');
+                filterDiv.className = 'filter'; // Add a CSS class for styling
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'columns';
+                checkbox.value = column;
+
+                // Set the 'checked' attribute to true to make the checkbox checked by default
+                checkbox.checked = true;
+
+                const label = document.createElement('label');
+                label.textContent = column;
+
+                // Append the checkbox and label to the filter div
+                filterDiv.appendChild(checkbox);
+                filterDiv.appendChild(label);
+
+                // Append the filter div to the container
+                searchFilters.appendChild(filterDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error reading JSON file:', error);
+        });
+}
