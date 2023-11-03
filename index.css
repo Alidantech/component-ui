@@ -1,5 +1,4 @@
 html, body {
-      /* background-color: rgb(39, 51, 61); */
       font-family: 'Poppins', sans-serif;
       font-size: 0.9em;
 }
@@ -94,7 +93,7 @@ main {
 }
 
 .result-cell:hover {
-      background-color: #f0f0f0;
+      background-color: #f0f0f028;
       /* Background color on hover */
 }
 
@@ -178,7 +177,7 @@ footer {
 
 #search-suggestions li {
       padding: 10px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ffffff;
       cursor: pointer;
 }
 
@@ -191,7 +190,7 @@ footer {
 }
 
 #loading-container {
-      background-color: rgba(255, 255, 255, 0.178);
+      background: radial-gradient(circle at center, rgba(175, 9, 9, 0.062), #00ff0010, rgba(0, 185, 241, 0.288));
       width: 100vw;
       height: 100vh;
       visibility: hidden;
@@ -200,22 +199,74 @@ footer {
       z-index: 100;
       display: flex;
       align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(20px);
+      justify-content: space-evenly;
+      flex-direction: column;
+      backdrop-filter: blur(100px);
 }
 
 @keyframes animateLoading {
       from{
             visibility: visible;
-            color: green;
+            color: rgb(2, 218, 247);
       }
       to {
             visibility: hidden;
-            color: blue;
+            color: rgb(0, 255, 0);
       }
 }
 
 
 .showLoad {
-      animation: animateLoading 1s;
+      animation: animateLoading 2s;
+}
+/* 
+.loading-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 9999;
+} */
+
+.spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #3498db;
+      /* Loading spinner colors */
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      /* position: absolute; */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin 1s linear infinite;
+      /* Animation duration */
+}
+
+@keyframes spin {
+      0% {
+            transform: rotate(0deg);
+            border-top: 4px solid rgb(0, 153, 255);
+      }
+
+      100% {
+            transform: rotate(360deg);
+            border-top: 4px solid #00ff15;
+      }
+}
+
+#load-title {
+      text-transform: capitalize;
+      /* Converts the text to start with capital letters */
+      font-size: 3em;
+      /* Adjust the font size to your preference */
+      /* Other CSS properties for further styling if needed */
+}
+
+iframe {
+      border: none;
+      background-color: transparent;
 }

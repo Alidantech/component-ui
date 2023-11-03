@@ -9,7 +9,7 @@ import { SuggestContent } from './SearchUI/Suggest.js';
 const searchBtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('search-input');
 const searchSuggestions = document.getElementById('search-suggestions');
-var tablesJsonPath = 'jsonFiles/tables.json';
+var tablesJsonPath = 'jsonFiles/students.json';
 
 searchBtn.addEventListener('click', () => {
   let keyword = searchInput.value;
@@ -52,60 +52,51 @@ const searchCourses = document.getElementById('search-courses');
 const searchTeachers = document.getElementById('search-teachers');
 const searchClasses = document.getElementById('search-classes');
 const searchTitle = document.getElementById('search-title');
-var Load = document.getElementById('loading-container');
+// var Load = document.getElementById('loading-container');
+var LoadTitle = document.getElementById('load-title');
+const Load = document.getElementById('loading-container');
 
+function showLoadingSpinner(title, jsonPath) {
+  Load.classList.add('showLoad');
+  LoadTitle.innerHTML = title;
+  searchTitle.innerHTML = title;
+  searchInput.placeholder = title;
+  setTimeout(function() {
+    Load.classList.remove('showLoad');
+  }, 2000);
+  tablesJsonPath = jsonPath;
+}
+
+
+
+// Add event listeners for the remaining search links
 searchGrades.addEventListener('click', function(event) {
   event.preventDefault();
-  tablesJsonPath = 'jsonFiles/grades.json';
-  Load.classList.toggle('showLoad');
-  Load.innerHTML = this.title;
-  searchTitle.innerHTML = this.title;
-  searchInput.placeholder = this.title
-})
-
+  const jsonPath = 'jsonFiles/grades.json';
+  showLoadingSpinner(this.title, jsonPath);
+});
 
 searchStudents.addEventListener('click', function(event) {
   event.preventDefault();
-
-  tablesJsonPath = 'jsonFiles/students.json';
-  Load.classList.toggle('showLoad');
-  Load.innerHTML = this.title;
-  searchTitle.innerHTML = this.title;
-  searchInput.placeholder = this.title
-
-  
-})
-Load.classList.remove('showLoad');
-
-searchClasses.addEventListener('click', function(event) {
-  event.preventDefault();
-
-  tablesJsonPath = 'jsonFiles/classes.json';
-  Load.classList.toggle('showLoad');
-  Load.innerHTML = this.title;
-  searchTitle.innerHTML = this.title;
-  searchInput.placeholder = this.title
-
-  
-})
+  const jsonPath = 'jsonFiles/students.json';
+  showLoadingSpinner(this.title, jsonPath);
+});
 
 searchCourses.addEventListener('click', function(event) {
   event.preventDefault();
-
-  tablesJsonPath = 'jsonFiles/courses.json';
-  Load.classList.toggle('showLoad');
- Load.innerHTML = this.title;
-  searchTitle.innerHTML = this.title;
-  searchInput.placeholder = this.title
-  
-})
+  const jsonPath = 'jsonFiles/courses.json';
+  showLoadingSpinner(this.title, jsonPath);
+});
 
 searchTeachers.addEventListener('click', function(event) {
   event.preventDefault();
+  const jsonPath = 'jsonFiles/teachers.json';
+  showLoadingSpinner(this.title, jsonPath);
+});
 
-  tablesJsonPath = 'jsonFiles/teachers.json';
-  Load.classList.toggle('showLoad');
-  Load.innerHTML = this.title;
-  searchTitle.innerHTML = this.title;
-  searchInput.placeholder = this.title
-})
+searchClasses.addEventListener('click', function(event) {
+  event.preventDefault();
+  const jsonPath = 'jsonFiles/classes.json';
+  showLoadingSpinner(this.title, jsonPath);
+});
+
